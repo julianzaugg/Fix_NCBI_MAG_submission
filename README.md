@@ -32,22 +32,25 @@ While processing MAGs, it will write to the stdout a list of which files it didn
 In the output directory that is specified in the initial command, any MAGs without NCBI submission errors will be found in the `clean/` subdirectory. Each MAG with submission errors will have three output files in the `fixed/` subdirectory: (1) *.clean.bed, (2) *.clean.fasta, and (3) *.errors.bed.
 
 ```
-corrected_mags/clean
-    01_S196.concoct.009.fasta
-    01_S196.metabat2_refined.015_sub.fasta
-    01_S196.metabat2_refined.054_sub.fasta
-    01_S196.metabat2_refined.069_sub.fasta
-corrected_mags/fixed
-    01_S196.maxbin.110.clean.bed
-    01_S196.maxbin.110.clean.fasta
-    01_S196.maxbin.110.errors.bed
-    01_S196.metabat2_refined.075_sub.clean.bed
-    01_S196.metabat2_refined.075_sub.clean.fasta
-    01_S196.metabat2_refined.075_sub.errors.bed
-    01_S196.metabat2_refined.083_sub.clean.bed
-    01_S196.metabat2_refined.083_sub.clean.fasta
-    01_S196.metabat2_refined.083_sub.errors.bed
-    01_S196.metabat_sspec.024.clean.bed
+$ tree corrected_mags/
+
+corrected_mags/
+├── clean
+│   ├── 01_S196.concoct.009.fasta
+│   ├── 01_S196.metabat2_refined.015_sub.fasta
+│   ├── 01_S196.metabat2_refined.054_sub.fasta
+│   ├── 01_S196.metabat2_refined.069_sub.fasta
+│   ├── 01_S196.metabat2_refined.072.fasta
+└── fixed
+    ├── 01_S196.maxbin.110.clean.bed
+    ├── 01_S196.maxbin.110.clean.fasta
+    ├── 01_S196.maxbin.110.errors.bed
+    ├── 01_S196.metabat2_refined.075_sub.clean.bed
+    ├── 01_S196.metabat2_refined.075_sub.clean.fasta
+    ├── 01_S196.metabat2_refined.075_sub.errors.bed
+    ├── 01_S196.metabat_sspec.024.clean.bed
+    ├── 01_S196.metabat_sspec.024.clean.fasta
+    └── 01_S196.metabat_sspec.024.errors.bed
 ```
 
 The fixed sequences in *.clean.fasta will have unique IDs as the coordinates for the remaining regions are added to the FASTA header.
