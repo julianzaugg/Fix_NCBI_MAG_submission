@@ -53,7 +53,7 @@ def check_for_errors(fasta, search, outdir):
     for error_file in glob.glob('{}/*'.format(search)):
 
         if name2.lower() in os.path.splitext(os.path.basename(error_file))[0].lower() :
-            print('    ERROR: {}'.format(error_file))
+            print('    Fixing errors in {}'.format(error_file))
             return(error_file)
 
     if not errors:
