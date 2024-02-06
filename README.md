@@ -15,6 +15,8 @@ python3 correct_mags.py \
 While processing MAGs, it will write to the stdout a list of which files it didn't find errors for and which it did. 
 
 ```
+$ python3 correct_mags.py -m mags -n ncbi_errors -o corrected_mags -e fasta
+
     No errors in mags/01_S196.metabat_sens.034_sub.fasta
     ERROR: ncbi_errors/remainingcontamination_01_s196_semibin_refined_071.txt
         - Creating BED summary of NCBI errors
