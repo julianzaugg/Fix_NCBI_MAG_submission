@@ -3,8 +3,8 @@
 Fix automated errors during the submission of MAGs to NCBI due to adaptors by removing problematic regions.
 
 Required Python packages:
-    - pybedtools
-    - biopython
+- pybedtools
+- biopython
 
 ```
 usage: correct_mags.py [-h] -m MAGS -n ERRORS -e EXTENSION -o OUTPUT
