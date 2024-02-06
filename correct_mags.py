@@ -33,7 +33,7 @@ def fasta_to_bed(fasta_file):
 
     bed_string=[]
 
-    with open(fasta_file) as f, open('sequences.bed','w') as out_f:
+    with open(fasta_file):
         for record in SeqIO.parse(fasta_file, 'fasta'):
             bed_string.append('{} 0 {}\n'.format(record.id, len(record)))
 
