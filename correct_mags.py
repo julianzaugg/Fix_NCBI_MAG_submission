@@ -80,22 +80,38 @@ def parse_ncbi_error(input_file):
 
 def create_new_bed(mag_bed, ncbi_bed, mag_fasta, outdir, extension):
 
+    # contigs in mag that don't overlap with ncbi errors
+    ok_contigs = mag_bed.intersect(ncbi_bed, v=True)
+    # contigs in mag that overlap with ncbi errors
     contigs_to_fix = mag_bed.intersect(ncbi_bed, wa=True)
-
+    # subtracting overlapping regions from those contigs and splitting
     corrected_bed = contigs_to_fix.subtract(ncbi_bed)
+
+    # fasta sequences for mag contigs not overlapping with ncbi errors
+    nonoverlapping_fasta = ok_contigs.sequence(fi=mag_fasta, fullHeader=True)
+    # fasta sequences for correct mag contigs that overlap with ncbi errors
     corrected_fasta = corrected_bed.sequence(fi=mag_fasta)
 
     file_prefix = os.path.splitext(os.path.basename(mag_fasta))[0]
 
-    print('        - Creating BED summary of NCBI errors')
+    # bed file of the NCBI errors
+    print('        - Creating BED summary of NCBI errors in MAG')
     ncbi_bed.saveas('{}/fixed/{}.errors.bed'.format(outdir, file_prefix))
 
-    print('        - Creating BED summary of corrected MAGs')
+    # specific to contigs that had NCBI errors removed
+    print('        - Creating BED summary of corrected contigs in MAG')
+    ok_contigs.saveas('{}/fixed/{}.fixed.bed'.format(outdir, file_prefix))
+
+    # bed file of contigs in mag that were fine with no errors
+    print('        - Creating BED summary of clean contigs MAG')
     corrected_bed.saveas('{}/fixed/{}.clean.bed'.format(outdir, file_prefix))
 
+    # write both corrected contigs and ok contigs that did not overlap with
+    # errors to FASTA File
     print('        - Creating FASTA for corrected MAGs')
-    with open('{}/fixed/{}.clean.{}'.format(outdir, file_prefix, extension), "w") as f:
+    with open('{}/fixed/{}.new.{}'.format(outdir, file_prefix, extension), "w") as f:
         f.write((open(corrected_fasta.seqfn).read()))
+        f.write((open(nonoverlapping_fasta.seqfn).read()))
 
 def correct_mags(args):
 
